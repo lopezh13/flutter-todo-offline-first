@@ -164,7 +164,7 @@ Una implementación posterior incorporaría:
 - El login utiliza credenciales fijas y no debe emplearse en producción.
 - No se implementó autenticación segura ni manejo de múltiples usuarios.
 - No existe paginación porque el alcance actual utiliza un conjunto local pequeño.
-- Android 12 aplica una máscara obligatoria al primer ícono del splash nativo. Después se presenta un splash Flutter con el logotipo completo.
+
 
 ## Mejoras futuras
 
