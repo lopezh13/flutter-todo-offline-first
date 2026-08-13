@@ -8,4 +8,11 @@ abstract final class AppTextStyles {
     fontSize: 42,
     height: 1.25,
   );
+
+  static const appBarBrandTitle = TextStyle(
+    color: AppColors.navy,
+    fontFamily: 'Pacifico',
+    fontSize: 30,
+    height: 1.2,
+  );
 }
