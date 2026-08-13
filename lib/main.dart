@@ -15,14 +15,22 @@ Future<void> main() async {
   final store = await openStore();
 
   Get.put<Store>(store, permanent: true);
-  Get.lazyPut<LocalAuthService>(() => const LocalAuthService());
-  Get.lazyPut<LoginController>(
-    () => LoginController(Get.find<LocalAuthService>()),
+  Get.put<LocalAuthService>(const LocalAuthService(), permanent: true);
+  Get.put<LoginController>(
+    LoginController(Get.find<LocalAuthService>()),
+    permanent: true,
   );
-  Get.put<TaskLocalDataSource>(ObjectBoxTaskLocalDataSource(store));
-  Get.put<TaskRepository>(TaskRepositoryImpl(Get.find<TaskLocalDataSource>()));
+  Get.put<TaskLocalDataSource>(
+    ObjectBoxTaskLocalDataSource(store),
+    permanent: true,
+  );
+  Get.put<TaskRepository>(
+    TaskRepositoryImpl(Get.find<TaskLocalDataSource>()),
+    permanent: true,
+  );
   Get.lazyPut<TasksController>(
     () => TasksController(Get.find<TaskRepository>()),
+    fenix: true,
   );
 
   runApp(const TodoApp());
