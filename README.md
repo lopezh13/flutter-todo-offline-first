@@ -2,6 +2,12 @@
 
 Aplicación móvil de gestión de tareas desarrollada con Flutter. La información se almacena localmente con ObjectBox, por lo que las tareas pueden consultarse y modificarse sin conexión a Internet.
 
+<img width="684" height="1441" alt="image" src="https://github.com/user-attachments/assets/b0bef0e0-9d44-4c49-8d34-d81b3df2e0f7" />
+<img width="324" height="725" alt="image" src="https://github.com/user-attachments/assets/30da63b7-ed6b-4e2c-9ab5-c76d9f761b6a" />
+<img width="332" height="710" alt="image" src="https://github.com/user-attachments/assets/9c935995-70d1-4e49-adbf-7d12f64c177d" />
+
+
+
 ## Funcionalidades
 
 - Inicio y cierre de sesión local.
