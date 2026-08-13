@@ -92,6 +92,9 @@ class _TaskFormPageState extends State<TaskFormPage> {
                 const SizedBox(height: 16),
                 DropdownButtonFormField<TaskPriority>(
                   initialValue: _priority,
+                  borderRadius: BorderRadius.circular(18),
+                  menuMaxHeight: 240,
+                  dropdownColor: Colors.white,
                   decoration: const InputDecoration(
                     labelText: 'Prioridad',
                     prefixIcon: Icon(Icons.flag_outlined),
@@ -100,7 +103,10 @@ class _TaskFormPageState extends State<TaskFormPage> {
                       .map(
                         (priority) => DropdownMenuItem(
                           value: priority,
-                          child: Text(_priorityLabel(priority)),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 8),
+                            child: Text(_priorityLabel(priority)),
+                          ),
                         ),
                       )
                       .toList(),

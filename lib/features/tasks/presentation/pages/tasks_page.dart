@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:prueba/core/theme/app_colors.dart';
 import 'package:prueba/core/theme/app_text_styles.dart';
+import 'package:prueba/features/auth/presentation/controllers/login_controller.dart';
+import 'package:prueba/features/auth/presentation/pages/login_page.dart';
 import 'package:prueba/features/tasks/domain/entities/task.dart';
 import 'package:prueba/features/tasks/presentation/controllers/tasks_controller.dart';
 import 'package:prueba/features/tasks/presentation/pages/task_form_page.dart';
@@ -17,6 +19,14 @@ class TasksPage extends GetView<TasksController> {
         toolbarHeight: 72,
         centerTitle: true,
         title: const Text('To Do List', style: AppTextStyles.appBarBrandTitle),
+        actions: [
+          IconButton(
+            onPressed: () => _confirmLogout(context),
+            icon: const Icon(Icons.logout_rounded),
+            tooltip: 'Cerrar sesión',
+          ),
+          const SizedBox(width: 8),
+        ],
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () => Get.to(() => const TaskFormPage()),
@@ -90,6 +100,32 @@ class TasksPage extends GetView<TasksController> {
       ),
     );
     if (confirmed == true) await controller.deleteTask(task);
+  }
+
+  Future<void> _confirmLogout(BuildContext context) async {
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        icon: const Icon(Icons.logout_rounded),
+        title: const Text('Cerrar sesión'),
+        content: const Text('¿Deseas salir de tu cuenta?'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context, false),
+            child: const Text('Cancelar'),
+          ),
+          FilledButton(
+            onPressed: () => Navigator.pop(context, true),
+            child: const Text('Cerrar sesión'),
+          ),
+        ],
+      ),
+    );
+
+    if (confirmed != true) return;
+
+    Get.find<LoginController>().clearForm();
+    Get.offAll(() => const LoginPage());
   }
 }
 

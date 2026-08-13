@@ -34,6 +34,14 @@ class LoginController extends GetxController {
     obscurePassword.toggle();
   }
 
+  void clearForm() {
+    usernameController.clear();
+    passwordController.clear();
+    obscurePassword.value = true;
+    errorMessage.value = null;
+    formKey.currentState?.reset();
+  }
+
   Future<void> login() async {
     errorMessage.value = null;
 
