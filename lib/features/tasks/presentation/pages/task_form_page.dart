@@ -48,7 +48,13 @@ class _TaskFormPageState extends State<TaskFormPage> {
       priority: _priority,
     );
 
-    if (saved) Get.back();
+    if (!saved) return;
+
+    Get.back();
+    Get.snackbar(
+      _isEditing ? 'Cambios guardados' : 'Tarea creada',
+      'Guardada en este dispositivo.',
+    );
   }
 
   @override

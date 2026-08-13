@@ -27,6 +27,17 @@ class TasksController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    _watchTasks();
+  }
+
+  void retryLoading() {
+    isLoading.value = true;
+    errorMessage.value = null;
+    _watchTasks();
+  }
+
+  void _watchTasks() {
+    _subscription?.cancel();
     _subscription = _repository.watchTasks().listen(
       (items) {
         tasks.assignAll(items);
@@ -82,6 +93,10 @@ class TasksController extends GetxController {
           isCompleted: !task.isCompleted,
           updatedAt: DateTime.now(),
         ),
+      );
+      Get.snackbar(
+        'Estado actualizado',
+        'El cambio se guardó en este dispositivo.',
       );
     } catch (_) {
       Get.snackbar('No se pudo actualizar', 'Inténtalo nuevamente.');

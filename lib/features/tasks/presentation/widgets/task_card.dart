@@ -63,6 +63,14 @@ class TaskCard extends StatelessWidget {
                                 ),
                           ),
                         ),
+                      ],
+                    ),
+                    const SizedBox(height: 6),
+                    Wrap(
+                      spacing: 6,
+                      runSpacing: 6,
+                      children: [
+                        _StatusBadge(isCompleted: task.isCompleted),
                         _PriorityBadge(priority: task.priority),
                       ],
                     ),
@@ -130,6 +138,32 @@ class TaskCard extends StatelessWidget {
     TaskPriority.medium => AppColors.lightBlue,
     TaskPriority.high => AppColors.navy,
   };
+}
+
+class _StatusBadge extends StatelessWidget {
+  const _StatusBadge({required this.isCompleted});
+
+  final bool isCompleted;
+
+  @override
+  Widget build(BuildContext context) {
+    final color = isCompleted ? AppColors.aqua : const Color(0xFFFFD79A);
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+      decoration: BoxDecoration(
+        color: color,
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: Text(
+        isCompleted ? 'Completada' : 'Pendiente',
+        style: const TextStyle(
+          color: AppColors.navy,
+          fontSize: 12,
+          fontWeight: FontWeight.w600,
+        ),
+      ),
+    );
+  }
 }
 
 class _PriorityBadge extends StatelessWidget {

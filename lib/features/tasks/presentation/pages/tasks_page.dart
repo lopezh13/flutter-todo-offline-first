@@ -45,6 +45,8 @@ class TasksPage extends GetView<TasksController> {
               icon: Icons.error_outline,
               title: 'Ocurrió un problema',
               message: error,
+              actionLabel: 'Reintentar',
+              onAction: controller.retryLoading,
             );
           }
 
@@ -202,10 +204,14 @@ class _MessageState extends StatelessWidget {
     required this.icon,
     required this.title,
     required this.message,
+    this.actionLabel,
+    this.onAction,
   });
   final IconData icon;
   final String title;
   final String message;
+  final String? actionLabel;
+  final VoidCallback? onAction;
 
   @override
   Widget build(BuildContext context) => Center(
@@ -226,6 +232,14 @@ class _MessageState extends StatelessWidget {
           Text(title, style: Theme.of(context).textTheme.titleLarge),
           const SizedBox(height: 8),
           Text(message, textAlign: TextAlign.center),
+          if (actionLabel != null && onAction != null) ...[
+            const SizedBox(height: 20),
+            OutlinedButton.icon(
+              onPressed: onAction,
+              icon: const Icon(Icons.refresh_rounded),
+              label: Text(actionLabel!),
+            ),
+          ],
         ],
       ),
     ),
